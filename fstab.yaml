@@ -1,6 +1,7 @@
 mountpoints:
   /:
-    url: https://content.da.live/choudharyamitdigitech/isaac/
+    # url: https://content.da.live/choudharyamitdigitech/isaac/
+    url: https://drive.google.com/drive/folders/1ZT5j-mr7TIeLD9aHNe5VHTVVSjaWuSit
     type: markup
 
 folders:
