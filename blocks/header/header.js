@@ -204,124 +204,166 @@ export default async function decorate(block) {
     brandLink.closest('.button-container').className = '';
   }
 
+  const toolbarWrapper = document.createElement('div');
+  toolbarWrapper.className = 'nav-header-toolbar';
+  block.append(toolbarWrapper);
+  
+  const navParentToMove = navBrand.parentNode;
+  toolbarWrapper.appendChild(navParentToMove);
+
+  const searchBarContainer = document.createElement('div');
+  searchBarContainer.className = 'searchbar_container';
+  toolbarWrapper.appendChild(searchBarContainer);
+
+  const searchBarStoreContainer = document.createElement('div');
+  searchBarStoreContainer.className = 'searchbar_store_container';
+  searchBarContainer.appendChild(searchBarStoreContainer);
+
+  // const navSections = nav.querySelector('.nav-sections');
+  // const dataPromise = await window.categoryData;
+  // const data = dataPromise?.data?.categories?.items;
+
+  // if (navSections) {
+  //   const navSectionsUlWrapper = document.createElement('div');
+  //   navSectionsUlWrapper.className = 'nav-sections-ul-wrapper';
+
+  //   [...data].reverse().map((ele) => {
+  //     const categoryUl = document.createElement('ul');
+  //     const categoryUlLi = document.createElement('li');
+  //     const categoryLink = document.createElement('a');
+
+  //     categoryLink.href = `${window.location.origin}/${ele.url}`;
+
+  //     if (window.location.pathname === `/${ele.url}`) {
+  //       categoryLink.classList.add('selected');
+  //     }
+  //     categoryLink.textContent = ele.name;
+  //     const categoryAccordian = document.createElement('a');
+
+  //     categoryAccordian.className = 'accordian-icon';
+  //     categoryLink.append(categoryAccordian);
+
+  //     function toggleListItem(e) {
+  //       if (!isDesktop.matches) {
+  //         e.preventDefault();
+  //         categoryUlLi.classList.toggle('expanded');
+  //       }
+  //     }
+
+  //     categoryAccordian.addEventListener('click', (e) => {
+  //       toggleListItem(e);
+  //     });
+
+  //     categoryUlLi.append(categoryLink);
+
+  //     if (ele.children.length > 0) {
+  //       const subCategoryUl = document.createElement('ul');
+  //       const subCategories = ele.children;
+
+  //       [...subCategories].map((e) => {
+  //         const subCategoryUlLi = document.createElement('li');
+  //         const subCategoryLink = document.createElement('a');
+
+  //         subCategoryLink.href = `${window.location.origin}/${e.url}`;
+  //         subCategoryLink.textContent = e.name;
+  //         subCategoryUlLi.append(subCategoryLink);
+  //         subCategoryUl.append(subCategoryUlLi);
+
+  //         return subCategoryUlLi;
+  //       });
+
+  //       categoryUlLi.append(subCategoryUl);
+  //     }
+
+  //     categoryUl.append(categoryUlLi);
+  //     navSectionsUlWrapper.prepend(categoryUl);
+  //     return categoryUl;
+  //   });
+
+  //   navSections.prepend(navSectionsUlWrapper);
+  //   navSections
+  //     .querySelectorAll(':scope .nav-sections-ul-wrapper > ul > li')
+  //     .forEach((navSection) => {
+  //       if (navSection.querySelector('ul')) {
+  //         navSection.classList.add('nav-drop');
+  //       }
+
+  //       navSection.addEventListener('click', () => {
+  //         if (isDesktop.matches) {
+  //           const expanded = navSection.getAttribute('aria-expanded') === 'true';
+  //           toggleAllNavSections(navSections);
+  //           navSection.setAttribute(
+  //             'aria-expanded',
+  //             expanded ? 'false' : 'true',
+  //           );
+  //         }
+  //       });
+  //     });
+  // }
+
   const navSections = nav.querySelector('.nav-sections');
-  const dataPromise = await window.categoryData;
-  const data = dataPromise?.data?.categories?.items;
-
   if (navSections) {
-    const navSectionsUlWrapper = document.createElement('div');
-    navSectionsUlWrapper.className = 'nav-sections-ul-wrapper';
-
-    [...data].reverse().map((ele) => {
-      const categoryUl = document.createElement('ul');
-      const categoryUlLi = document.createElement('li');
-      const categoryLink = document.createElement('a');
-
-      categoryLink.href = `${window.location.origin}/${ele.url}`;
-
-      if (window.location.pathname === `/${ele.url}`) {
-        categoryLink.classList.add('selected');
-      }
-      categoryLink.textContent = ele.name;
-      const categoryAccordian = document.createElement('a');
-
-      categoryAccordian.className = 'accordian-icon';
-      categoryLink.append(categoryAccordian);
-
-      function toggleListItem(e) {
-        if (!isDesktop.matches) {
-          e.preventDefault();
-          categoryUlLi.classList.toggle('expanded');
+    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
+      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
+      navSection.addEventListener('click', () => {
+        if (isDesktop.matches) {
+          const expanded = navSection.getAttribute('aria-expanded') === 'true';
+          toggleAllNavSections(navSections);
+          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         }
-      }
-
-      categoryAccordian.addEventListener('click', (e) => {
-        toggleListItem(e);
       });
-
-      categoryUlLi.append(categoryLink);
-
-      if (ele.children.length > 0) {
-        const subCategoryUl = document.createElement('ul');
-        const subCategories = ele.children;
-
-        [...subCategories].map((e) => {
-          const subCategoryUlLi = document.createElement('li');
-          const subCategoryLink = document.createElement('a');
-
-          subCategoryLink.href = `${window.location.origin}/${e.url}`;
-          subCategoryLink.textContent = e.name;
-          subCategoryUlLi.append(subCategoryLink);
-          subCategoryUl.append(subCategoryUlLi);
-
-          return subCategoryUlLi;
-        });
-
-        categoryUlLi.append(subCategoryUl);
-      }
-
-      categoryUl.append(categoryUlLi);
-      navSectionsUlWrapper.prepend(categoryUl);
-      return categoryUl;
     });
-
-    navSections.prepend(navSectionsUlWrapper);
-    navSections
-      .querySelectorAll(':scope .nav-sections-ul-wrapper > ul > li')
-      .forEach((navSection) => {
-        if (navSection.querySelector('ul')) {
-          navSection.classList.add('nav-drop');
-        }
-
-        navSection.addEventListener('click', () => {
-          if (isDesktop.matches) {
-            const expanded = navSection.getAttribute('aria-expanded') === 'true';
-            toggleAllNavSections(navSections);
-            navSection.setAttribute(
-              'aria-expanded',
-              expanded ? 'false' : 'true',
-            );
-          }
-        });
-      });
   }
 
   const navTools = nav.querySelector('.nav-tools');
 
-  const search = document.createRange().createContextualFragment(`
-    <div class="search-wrapper nav-tools-wrapper">
-      <button type="button" class="nav-search-button">Search</button>
-      <div class="nav-search-input nav-search-panel nav-tools-panel">
-        <form action="/search" method="GET">
-          <input id="search" type="search" name="q" placeholder="Search" />
-          <div id="search_autocomplete" class="search-autocomplete"></div>
-        </form>
-      </div>
+  // const search = document.createRange().createContextualFragment(`
+  //   <div class="search-wrapper nav-tools-wrapper">
+  //     <button type="button" class="nav-search-button">Search</button>
+  //     <div class="nav-search-input nav-search-panel nav-tools-panel">
+  //       <form action="/search" method="GET">
+  //         <input id="search" type="search" name="q" placeholder="Search" />
+  //         <div id="search_autocomplete" class="search-autocomplete"></div>
+  //       </form>
+  //     </div>
+  //   </div>
+  //   `);
+
+  // navTools.append(search);
+
+  // const searchPanel = navTools.querySelector('.nav-search-panel');
+
+  // const searchButton = navTools.querySelector('.nav-search-button');
+
+  // const searchInput = searchPanel.querySelector('input');
+
+  // async function toggleSearch(state) {
+  //   const show = state ?? !searchPanel.classList.contains('nav-tools-panel--show');
+
+  //   searchPanel.classList.toggle('nav-tools-panel--show', show);
+
+  //   if (show) {
+  //     await import('./searchbar.js');
+  //     searchInput.focus();
+  //   }
+  // }
+
+  // navTools
+  //   .querySelector('.nav-search-button')
+  //   .addEventListener('click', () => toggleSearch());
+
+  const searchBar = document.createRange().createContextualFragment(`
+    <div class="nav-search-input nav-search-panel nav-tools-panel">
+      <form action="/search" method="GET">
+        <input id="search" type="search" name="q" placeholder="Search" />
+        <div id="search_autocomplete" class="search-autocomplete"></div>
+      </form>
     </div>
-    `);
+  `);
 
-  navTools.append(search);
+  searchBarContainer.appendChild(searchBar);
 
-  const searchPanel = navTools.querySelector('.nav-search-panel');
-
-  const searchButton = navTools.querySelector('.nav-search-button');
-
-  const searchInput = searchPanel.querySelector('input');
-
-  async function toggleSearch(state) {
-    const show = state ?? !searchPanel.classList.contains('nav-tools-panel--show');
-
-    searchPanel.classList.toggle('nav-tools-panel--show', show);
-
-    if (show) {
-      await import('./searchbar.js');
-      searchInput.focus();
-    }
-  }
-
-  navTools
-    .querySelector('.nav-search-button')
-    .addEventListener('click', () => toggleSearch());
+  toolbarWrapper.appendChild(navTools);
 
   /** Mini Cart */
   const excludeMiniCartFromPaths = ['/checkout'];
@@ -475,6 +517,7 @@ export default async function decorate(block) {
   // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
+
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);

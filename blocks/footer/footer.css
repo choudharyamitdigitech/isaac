@@ -1,8 +1,10 @@
-.footer-wrapper .default-content-wrapper {
+/* .footer-wrapper .default-content-wrapper {
     max-width: var(--footer-max-width);
     width: 100%;
     padding: 0;
     margin: 0 auto;
+
+    display: flex;
 }
 
 .footer-wrapper .default-content-wrapper ul {
@@ -13,6 +15,12 @@
     justify-content: space-between;
     padding: var(--spacing-xxbig) 0;
     margin: 0 auto;
+
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 16.6667%;
 }
 
 .footer-wrapper .default-content-wrapper li {
@@ -46,4 +54,75 @@
     width: 100%;
     height: 8px;
     background-color: var(--adobe-brand-color);
+} */
+
+:root {
+  --primary-color: #fff1e8;
+  --secondary-color: #333;
+  --accent-color: #gold;
+  --text-color: #000;
+  --hover-color: #ffd700;
+  --transition: all 0.3s ease;
+}
+
+.footer-wrapper {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  padding: 4rem 2rem 2rem;
+  font-family: Arial, sans-serif;
+}
+
+.footer-wrapper .footer{
+    padding: 30px 40px;
+}
+
+.footer-wrapper .default-content-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  /* max-width: 1200px; */
+  margin: 0 auto;
+}
+
+.footer-wrapper .default-content-wrapper ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-wrapper .default-content-wrapper ul li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-wrapper .default-content-wrapper ul li a {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: var(--transition);
+  font-size: 0.9rem;
+}
+
+.footer-wrapper .default-content-wrapper ul li a:hover {
+  color: var(--hover-color);
+  padding-left: 8px;
+}
+
+.footer-wrapper .default-content-wrapper p {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .footer-wrapper .default-content-wrapper {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    padding: 3rem 1rem 1rem;
+  }
+
+  .footer-wrapper .default-content-wrapper ul li a {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-wrapper .default-content-wrapper {
+    grid-template-columns: 1fr;
+  }
 }

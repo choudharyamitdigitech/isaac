@@ -213,32 +213,40 @@ header nav .nav-sections .nav-sections-ul-wrapper > ul > li > a:hover {
 }
 
 /* tools */
-header nav .nav-tools-panel {
+header .nav-header-toolbar .nav-tools-panel {
+  display: grid;
+  justify-items: stretch;
   z-index: 100;
-  position: absolute;
+  /* position: absolute; */
   box-shadow: var(--shape-shadow-2);
   background: var(--background-color);
   top: var(--nav-height);
   right: 0;
   width: 100%;
-  display: none;
+  max-width: 450px;
+  /* display: none; */
   box-sizing: border-box;
 }
 
-header nav .nav-tools-panel--show {
+header .nav-header-toolbar .nav-tools-panel--show {
   display: block;
 }
 
-header nav .nav-tools {
-  grid-area: tools;
+header .nav-header-toolbar .nav-tools {
+  /* grid-area: tools;
   display: flex;
   height: 100%;
-  gap: var(--spacing-small);
+  gap: var(--spacing-small); */
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 25px;
+  position: relative;
+  height: 100%;
   align-items: center;
   background: var(--background-color);
 }
 
-header nav .nav-tools-wrapper > button {
+header .nav-header-toolbar .nav-tools-wrapper > button {
   color: var(--color-brand-700);
   background: transparent;
   padding: var(--spacing-small);
@@ -248,7 +256,7 @@ header nav .nav-tools-wrapper > button {
   width: 40px;
 }
 
-header nav .nav-tools button.nav-cart-button {
+header .nav-header-toolbar .nav-tools button.nav-cart-button {
   background-image: url('../../icons/cart.svg');
   background-repeat: no-repeat;
   background-position: center;
@@ -258,7 +266,7 @@ header nav .nav-tools button.nav-cart-button {
   font-weight: bold;
 }
 
-header nav .nav-tools button.nav-cart-button[data-count]::after {
+header .nav-header-toolbar .nav-tools button.nav-cart-button[data-count]::after {
   content: attr(data-count);
   position: absolute;
   top: 0;
@@ -274,7 +282,7 @@ header nav .nav-tools button.nav-cart-button[data-count]::after {
   justify-content: center;
 }
 
-header nav .nav-tools button.nav-search-button {
+header .nav-header-toolbar .nav-tools button.nav-search-button {
   font-size: 0;
   background-image: url('../../icons/search.svg');
   background-repeat: no-repeat;
@@ -818,4 +826,25 @@ header
     width: 100%;
     color: var(--color-neutral-50);
   }
+}
+
+.nav-header-toolbar {
+    display: grid;
+    grid-template-columns: max-content max-content 1fr 0fr;
+    padding: 0 40px;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    z-index: 40;
+}
+
+.header.block {
+    display: grid;
+    top: 0;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    grid-auto-columns: minmax(0, 1fr);
+    justify-content: center;
+    width: 100%;
+    background: #fff;
 }

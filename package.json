@@ -37,11 +37,12 @@
     "@adobe/magento-storefront-events-sdk": "^1.8.0",
     "@dropins/storefront-account": "~1.0.3",
     "@dropins/storefront-auth": "~1.0.3",
-    "@dropins/storefront-cart": "~1.0.3",
+    "@dropins/storefront-cart": "^1.4.0-beta1",
     "@dropins/storefront-checkout": "~1.2.0",
     "@dropins/storefront-order": "~1.0.4",
     "@dropins/storefront-payment-services": "~1.0.1",
     "@dropins/storefront-pdp": "^1.1.1",
-    "@dropins/tools": "^0.41.0"
+    "@dropins/tools": "^0.41.0",
+    "postinstall": "^0.11.2"
   }
 }
